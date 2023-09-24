@@ -55,23 +55,34 @@ class TomatoSupportServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //you boot methods here
-        TomatoMenu::register([
-            Menu::make()
+        $menus = [];
+
+        if(config('tomato-support.features.tickets')){
+            $menus[] = Menu::make()
                 ->group(__('Support Center'))
                 ->label(__('Tickets'))
                 ->icon('bx bx-sticker')
-                ->route('admin.tickets.index'),
-            Menu::make()
-                ->group(__('Support Center'))
-                ->label(__('FAQ'))
-                ->icon('bx bx-help-circle')
-                ->route('admin.questions.index'),
-            Menu::make()
+                ->route('admin.tickets.index');
+        }
+
+        if(config('tomato-support.features.tickets')){
+            $menus[] = Menu::make()
                 ->group(__('Support Center'))
                 ->label(__('Pages'))
                 ->icon('bx bx-file')
-                ->route('admin.pages.index')
-        ]);
+                ->route('admin.pages.index');
+        }
+
+        if(config('tomato-support.features.faq')){
+            $menus[] = Menu::make()
+                ->group(__('Support Center'))
+                ->label(__('FAQ'))
+                ->icon('bx bx-help-circle')
+                ->route('admin.questions.index');
+        }
+
+
+        //you boot methods here
+        TomatoMenu::register($menus);
     }
 }

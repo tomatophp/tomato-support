@@ -11,30 +11,32 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
+        if(config('tomato-support.features.tickets')) {
+            Schema::create('tickets', function (Blueprint $table) {
+                $table->id();
 
-            //Add Status For Tickets
-            $table->foreignId('type_id')->nullable()->constrained('types')->onDelete('cascade');
+                //Add Status For Tickets
+                $table->foreignId('type_id')->nullable()->constrained('types')->onDelete('cascade');
 
-            //Link User To Ticket With Morph
-            $table->morphs('accountable');
-            $table->string('name')->nullable();
-            $table->string('phone')->nullable();
+                //Link User To Ticket With Morph
+                $table->morphs('accountable');
+                $table->string('name')->nullable();
+                $table->string('phone')->nullable();
 
-            //Add User For Tickets
-            $table->string('subject');
-            $table->string('code')->unique()->index();
-            $table->longText('message')->nullable();
+                //Add User For Tickets
+                $table->string('subject');
+                $table->string('code')->unique()->index();
+                $table->longText('message')->nullable();
 
-            //Get Last update time
-            $table->timestamp('last_update')->nullable();
+                //Get Last update time
+                $table->timestamp('last_update')->nullable();
 
-            //Is closed
-            $table->boolean('is_closed')->default(false)->nullable();
+                //Is closed
+                $table->boolean('is_closed')->default(false)->nullable();
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**

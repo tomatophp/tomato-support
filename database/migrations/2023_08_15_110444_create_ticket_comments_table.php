@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_comments', function (Blueprint $table) {
-            $table->id();
+        if(config('tomato-support.features.tickets')) {
+            Schema::create('ticket_comments', function (Blueprint $table) {
+                $table->id();
 
-            //Ref
-            $table->foreignId('ticket_id')->constrained('tickets')->onDelete('cascade');
+                //Ref
+                $table->foreignId('ticket_id')->constrained('tickets')->onDelete('cascade');
 
-            //Link User To Ticket With Morph
-            $table->morphs('accountable');
+                //Link User To Ticket With Morph
+                $table->morphs('accountable');
 
-            //Add User For Tickets
-            $table->longText('response');
+                //Add User For Tickets
+                $table->longText('response');
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**

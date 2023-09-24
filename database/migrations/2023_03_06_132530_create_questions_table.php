@@ -13,18 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
-            $table->id();
+        if(config('tomato-support.features.faq')){
+            Schema::create('questions', function (Blueprint $table) {
+                $table->id();
 
-            //QA Category
-            $table->foreignId('type_id')->nullable()->constrained('types')->onDelete('cascade');
+                //QA Category
+                $table->foreignId('type_id')->nullable()->constrained('types')->onDelete('cascade');
 
-            //QA / Answer
-            $table->json('qa');
-            $table->json('answer')->nullable();
+                //QA / Answer
+                $table->json('qa');
+                $table->json('answer')->nullable();
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
+
     }
 
     /**
