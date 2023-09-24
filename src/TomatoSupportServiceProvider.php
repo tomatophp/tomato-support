@@ -3,6 +3,8 @@
 namespace TomatoPHP\TomatoSupport;
 
 use Illuminate\Support\ServiceProvider;
+use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
+use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
 
 
 class TomatoSupportServiceProvider extends ServiceProvider
@@ -47,11 +49,29 @@ class TomatoSupportServiceProvider extends ServiceProvider
 
         //Register Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
 
     }
 
     public function boot(): void
     {
         //you boot methods here
+        TomatoMenu::register([
+            Menu::make()
+                ->group(__('Support Center'))
+                ->label(__('Tickets'))
+                ->icon('bx bx-sticker')
+                ->route('admin.tickets.index'),
+            Menu::make()
+                ->group(__('Support Center'))
+                ->label(__('FAQ'))
+                ->icon('bx bx-help-circle')
+                ->route('admin.questions.index'),
+            Menu::make()
+                ->group(__('Support Center'))
+                ->label(__('Pages'))
+                ->icon('bx bx-file')
+                ->route('admin.pages.index')
+        ]);
     }
 }
