@@ -1,10 +1,5 @@
 <?php
 
-
-if(config('tomato-support.features.pages')) {
-    Route::get('pages/{slug}', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'html'])->name('admin.pages.html');
-}
-
 if(config('tomato-support.features.faq')) {
     Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
         Route::get('admin/questions', [\TomatoPHP\TomatoSupport\Http\Controllers\QuestionController::class, 'index'])->name('questions.index');
