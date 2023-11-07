@@ -65,14 +65,6 @@ class TomatoSupportServiceProvider extends ServiceProvider
                 ->route('admin.tickets.index');
         }
 
-        if(config('tomato-support.features.tickets')){
-            $menus[] = Menu::make()
-                ->group(__('Support Center'))
-                ->label(__('Pages'))
-                ->icon('bx bx-file')
-                ->route('admin.pages.index');
-        }
-
         if(config('tomato-support.features.faq')){
             $menus[] = Menu::make()
                 ->group(__('Support Center'))

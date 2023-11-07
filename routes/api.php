@@ -16,12 +16,4 @@ if(config('tomato-support.features.apis')) {
             Route::get('/', [\TomatoPHP\TomatoSupport\Http\Controllers\QuestionController::class, 'index'])->name('index');
         });
     }
-
-    if(config('tomato-support.features.pages')) {
-        Route::middleware(['auth:sanctum'])->prefix('api/pages')->name('api.pages.')->group(function () {
-            Route::get('/', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'index'])->name('index');
-            Route::get('/{model}', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'show'])->name('show');
-        });
-    }
-
 }

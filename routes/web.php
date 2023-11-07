@@ -18,19 +18,6 @@ if(config('tomato-support.features.faq')) {
     });
 }
 
-if(config('tomato-support.features.pages')) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
-        Route::get('admin/pages', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'index'])->name('pages.index');
-        Route::get('admin/pages/api', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'api'])->name('pages.api');
-        Route::get('admin/pages/create', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'create'])->name('pages.create');
-        Route::post('admin/pages', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'store'])->name('pages.store');
-        Route::get('admin/pages/{model}', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'show'])->name('pages.show');
-        Route::get('admin/pages/{model}/edit', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'edit'])->name('pages.edit');
-        Route::post('admin/pages/{model}', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'update'])->name('pages.update');
-        Route::delete('admin/pages/{model}', [\TomatoPHP\TomatoSupport\Http\Controllers\PageController::class, 'destroy'])->name('pages.destroy');
-    });
-}
-
 if(config('tomato-support.features.tickets')) {
     Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
         Route::get('admin/tickets', [\TomatoPHP\TomatoSupport\Http\Controllers\TicketController::class, 'index'])->name('tickets.index');

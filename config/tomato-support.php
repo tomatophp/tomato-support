@@ -25,10 +25,6 @@ return [
             "index" => TicketsResource::class,
             "show" => TicketResource::class
         ],
-        "pages" => [
-            "index" => PagesResource::class,
-            "show" => PagesResource::class
-        ],
         "faq" => [
             "index" => FAQResource::class,
             "show" => FAQResource::class
@@ -40,7 +36,6 @@ return [
      */
     "features" => [
         "faq" => true,
-        "pages" => true,
         "tickets" => true,
         "apis" => true
     ]
