@@ -1,7 +1,7 @@
 <?php
 
 if(config('tomato-support.features.faq')) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/questions', [\TomatoPHP\TomatoSupport\Http\Controllers\QuestionController::class, 'index'])->name('questions.index');
         Route::get('admin/questions/api', [\TomatoPHP\TomatoSupport\Http\Controllers\QuestionController::class, 'api'])->name('questions.api');
         Route::get('admin/questions/create', [\TomatoPHP\TomatoSupport\Http\Controllers\QuestionController::class, 'create'])->name('questions.create');
@@ -14,7 +14,7 @@ if(config('tomato-support.features.faq')) {
 }
 
 if(config('tomato-support.features.tickets')) {
-    Route::middleware(['web', 'auth', 'splade', 'verified'])->name('admin.')->group(function () {
+    Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
         Route::get('admin/tickets', [\TomatoPHP\TomatoSupport\Http\Controllers\TicketController::class, 'index'])->name('tickets.index');
         Route::get('admin/tickets/api', [\TomatoPHP\TomatoSupport\Http\Controllers\TicketController::class, 'api'])->name('tickets.api');
         Route::get('admin/tickets/create', [\TomatoPHP\TomatoSupport\Http\Controllers\TicketController::class, 'create'])->name('tickets.create');
